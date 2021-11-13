@@ -4,10 +4,10 @@ import RestoCard from "./restoCard";
 function Main() {
   return (
     <div>
-      <div className="text-5xl Restourants flex flex-wrap align-middle  max-w-7xl ml-auto mr-auto font-semibold pl-5 mt-10 mb-5">
-        Top Restourants near you
+      <div className="text-5xl Restaurants flex flex-wrap align-middle  max-w-7xl ml-auto mr-auto font-semibold pl-5 mt-10 mb-5">
+        Top Restaurants near you
       </div>
-      <div className="Restourants flex flex-wrap align-middle  max-w-7xl ml-auto mr-auto ">
+      <div className="Restaurants flex flex-wrap align-middle  max-w-7xl ml-auto mr-auto ">
         <RestoCard
           id="1"
           imgUrl="https://b.zmtcdn.com/data/pictures/chains/0/100180/ca285708630d9056e32e01ea579c3b44_o2_featured_v2.jpg?output-format=webp"

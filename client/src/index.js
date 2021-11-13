@@ -16,7 +16,7 @@ ReactDOM.render(
         <Routes>
           <Route path="/" element={<App />}>
             <Route path="/" element={<Main />} />
-            <Route path="/Restourant/:id" element={<Restaurant/>}/>
+            <Route path="/Restaurant/:id" element={<Restaurant/>}/>
             <Route path="/profile" element={<Profile />} />
           </Route>
         </Routes>
