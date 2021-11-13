@@ -5,7 +5,6 @@ import { useAuth0 } from "@auth0/auth0-react";
 import Header from "./components/header";
 import Footer from "./components/footer";
 
-
 function App() {
   const { isLoading, isAuthenticated } = useAuth0();
   return (
@@ -17,8 +16,7 @@ function App() {
         </div>
       ) : null}
       <header className="App-header">
-        <Navbar />
-      <Header />
+        <Header />
       </header>
       <Outlet />
       <Footer />

@@ -1,19 +1,23 @@
+import { useAuth0 } from "@auth0/auth0-react";
 import React from "react";
+import LoginButton from "../LoginButton";
+import LogoutButton from "../LogoutButton";
 
-function Profile(props) {
+function Profile() {
+  const { user, isAuthenticated } = useAuth0();
   return (
-    <div>
-      {props.profileStatus === "LogedIn" ? (
-        <div className=" p-6 ml-80 flex">
-          <i class="fas fa-user mr-3 justify-center align-middle  text-xl"></i>
-          Hey User!
-        </div>
+    <div className="flex">
+      {isAuthenticated ? (
+        <>
+          <div className="p-6 ml-80 flex">
+            <i class="fas fa-user mr-3 justify-center align-middle  text-xl"></i>
+            Hey {user.name}
+          </div>
+          <LogoutButton />
+        </>
       ) : (
         <div className="flex p-6 ml-72 ">
-          <button className="mr-10 p-1 justify-center align-middle">
-            Log in
-          </button>
-          <button className="justify-center align-middle p-1">Sign up</button>
+          <LoginButton />
         </div>
       )}
     </div>
