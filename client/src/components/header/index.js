@@ -12,12 +12,12 @@ function Header() {
             src="https://b.zmtcdn.com/web_assets/b40b97e677bc7b2ca77c58c61db266fe1603954218.png"
           ></img>
         </div>
-        <div className="header-searchbar p-6   ">
+        <div className="header-searchbar p-6 ">
           <i class="fi fi-rr-Search"></i>
-          <div className="header-icon-searchbar shadow ">
+          <div className="header-icon-searchbar shadow rounded-md">
             <i class="fas fa-search  mr-3 ml-3 text-xl justify-center align-middle"></i>
             <input
-              className="outline-none p-1 justify-center align-middle  w-96"
+              className="outline-none p-1 justify-center align-middle  w-96 rounded-md"
               type="search"
               placeholder="Search for restaurant, cuisine or a dish"
             />
