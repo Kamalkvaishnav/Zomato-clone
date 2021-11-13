@@ -1,27 +1,26 @@
 import "./App.css";
+import Navbar from "./components/Navbar";
+import { Outlet } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 import Header from "./components/header";
-import Main from "./components/main";
 import Footer from "./components/footer";
-import Restaurant from "./components/main/RestaurantPage/Restaurant";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Switch,
-  Redirect,
-} from "react-router-dom";
 
 function App() {
+  const { isLoading, isAuthenticated } = useAuth0();
   return (
-    <Router>
-      <Header></Header>
-      <Routes>
-        <Route exact path="/" element={<Main/>} />
-        <Route exact path="/Resto" element={<Restaurant/>} />
-      </Routes>
-
+    <div className="relative">
+      {isLoading && !isAuthenticated ? (
+        <div className="fixed flex flex-col items-center justify-center inset-0 backdrop-brightness-90">
+          <div className="mx-auto h-12 w-12 rounded-full animate-spin border-4 border-blue-400 border-t-blue-800"></div>
+          <h1>Loading..</h1>
+        </div>
+      ) : null}
+      <header className="App-header">
+        <Header />
+      </header>
+      <Outlet />
       <Footer />
-    </Router>
+    </div>
   );
 }
 
