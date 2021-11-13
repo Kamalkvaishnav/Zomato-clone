@@ -7,15 +7,21 @@ const Auth0ProviderWithHistory = ({ children }) => {
 
   console.log(domain, clientId);
 
-  const history = useNavigate();
+  const navigate = useNavigate();
 
   const onRedirectCallback = (appState) => {
-    console.log(appState);
-    history.push(appState?.returnTo || window.location.pathname);
+    navigate(appState?.returnTo || window.location.pathname);
   };
 
   return (
-    <Auth0Provider domain={domain} clientId={clientId} redirectUri={window.location.origin} onRedirectCallback={onRedirectCallback} audience={process.env.REACT_APP_AUTH0_AUDIENCE}>
+    <Auth0Provider
+      domain={domain}
+      clientId={clientId}
+      redirectUri={window.location.origin}
+      onRedirectCallback={onRedirectCallback}
+      audience={process.env.REACT_APP_AUTH0_AUDIENCE}
+      useRefreshTokens={true}
+    >
       {children}
     </Auth0Provider>
   );

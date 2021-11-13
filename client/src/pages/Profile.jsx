@@ -4,19 +4,19 @@ import { useAuth0 } from "@auth0/auth0-react";
 const Profile = () => {
   const { user, isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
   useEffect(() => {
-    let token;
-    getAccessTokenSilently().then((tok) => {
-      token = tok;
-      console.log(token, "got");
-      fetch("http://localhost:5000/", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-        .then((res) => res.json())
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err));
-    });
+    // let token;
+    // getAccessTokenSilently().then((tok) => {
+    //   token = tok;
+    //   console.log(token, "got");
+    //   fetch("http://localhost:5000/", {
+    //     headers: {
+    //       Authorization: `Bearer ${token}`,
+    //     },
+    //   })
+    //     .then((res) => res.json())
+    //     .then((res) => console.log(res))
+    //     .catch((err) => console.log(err));
+    // });
   }, []);
 
   if (isLoading) {
