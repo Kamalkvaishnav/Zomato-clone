@@ -3,11 +3,13 @@ const router = express.Router();
 const Modal = require("../Modal");
 
 router.post("/addMenu", async (req, res) => {
-  const restaurant = await Modal.findOne({ id: req.body["res_id"] });
+  const restaurant = await Modal.findOne({ _id: req.body["res_id"] });
+  console.log(restaurant);
   if (restaurant) {
     try {
-      let { menu } = req.body;
-      restaurant.menu = [...restaurant.menu, ...menu];
+      let menu = req.body.menu;
+      console.log(menu);
+      restaurant.menu.push(menu);
       await restaurant.save();
       return res.json({ err: false, message: "Menu  added successfully" });
     } catch (err) {
