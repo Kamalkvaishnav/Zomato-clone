@@ -3,13 +3,23 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { Auth0Provider } from "@auth0/auth0-react";
+import Auth0ProviderWithHistory from "./auth/auth0-provider-with-history";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Profile from "./pages/Profile";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Auth0Provider domain={"dev-k0hwa40u.us.auth0.com"} clientId={"AduTKZ2tysFkPcVxLJzwpZLGigFdGuMc"} redirectUri={window.location.origin}>
-      <App />
-    </Auth0Provider>
+    <BrowserRouter>
+      <Auth0ProviderWithHistory>
+        <Routes>
+          <Route path="/" element={<App />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/profile" element={<Profile />} />
+          </Route>
+        </Routes>
+      </Auth0ProviderWithHistory>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root"),
 );
