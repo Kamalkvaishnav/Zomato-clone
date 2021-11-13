@@ -4,10 +4,9 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  const { user, isAuthenticated, isLoading } = useAuth0();
+  const { user, isAuthenticated } = useAuth0();
   return (
     <div>
-      <h1>{isLoading}</h1>
       <nav className="flex items-center bg-gray-50 justify-between shadow-md px-4 py-2">
         <Link to="/">
           <h1 className="font-mono text-blue-600 font-bold text-xl">Food King</h1>
