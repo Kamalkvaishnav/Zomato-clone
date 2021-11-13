@@ -5,7 +5,7 @@ function Main() {
   return (
     <div>
       <div className="text-5xl Restourants flex flex-wrap align-middle  max-w-7xl ml-auto mr-auto font-semibold pl-5 mt-10 mb-5">
-        Top Restourents near you
+        Top Restourants near you
       </div>
       <div className="Restourants flex flex-wrap align-middle  max-w-7xl ml-auto mr-auto ">
         <RestoCard

@@ -1,17 +1,17 @@
 import React from "react";
 
-function RestoCard(props) {
+function RestoCard({imgUrl, restoName, discription, rating}) {
   return (
     <div class="p-6 ">
       <div class=" max-w-xs overflow-hidden shadow-lg rounded-md hover:scale-105 bg-white">
-        <img class="w-full" src={props.imgUrl} alt="Mountain" />
+        <img class="w-full" src={imgUrl} alt="Mountain" />
         <div class="px-6 py-4">
-          <div class="font-bold text-xl mb-2">{props.restoName}</div>
+          <div class="font-bold text-xl mb-2">{restoName}</div>
           <div className="flex justify-between">
-            <p class="text-gray-700 text-base">{props.discription}</p>
+            <p class="text-gray-700 text-base">{discription}</p>
             <div className="p-3 bg-green-600 rounded text-white ">
               <span className="  justify-center flex ">
-                {props.rating}
+                {rating}
                 <div className="text-xs mt-1 ml-1">
                   <i class="fas fa-star"></i>
                 </div>

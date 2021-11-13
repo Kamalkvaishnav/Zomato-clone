@@ -1,6 +1,7 @@
 import React from "react";
 import Menu from "./RestoInfo";
 import Header from "../../header";
+import RestoInfo from "./RestoInfo";
 
 function Restaurant() {
   return (
@@ -23,10 +24,7 @@ function Restaurant() {
               ></img>
             </div>
           </div>
-          <div className="Restaurant-information align-middle flex max-w-7xl ml-auto mr-auto ">
-                <h1 className="restoName text-5xl m-0 px-6">Restaurant's Name</h1>
-
-          </div>
+          <RestoInfo/>
         </div>
       </div>
     </div>
