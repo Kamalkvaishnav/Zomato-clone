@@ -1,10 +1,15 @@
 import "./App.css";
+import Header from "./components/header";
+import Main from "./components/main";
+import Footer from "./components/footer";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <p className="bg-blue-500 text-center p-6">hello routing</p>
+        <Header/>
+        <Main/>
+        <Footer/>
       </header>
     </div>
   );
