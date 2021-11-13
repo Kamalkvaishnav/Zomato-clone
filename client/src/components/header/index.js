@@ -2,7 +2,7 @@ import React , {useState} from "react";
 import Profile from "./profile";
 
 function Header() {
-    const [profileStatus, setProfileStatus] = useState("LogedIn")
+    const [profileStatus, setProfileStatus] = useState("NotLogedIn")
     return (
     <div className="header align-middle flex max-w-7xl ml-auto mr-auto">
       <div className="flex ">
