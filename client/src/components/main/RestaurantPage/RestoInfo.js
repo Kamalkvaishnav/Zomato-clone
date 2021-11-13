@@ -26,6 +26,7 @@ function RestoInfo({ name, discription, address, rating }) {
         <hr />
         <br />
       </div>
+      <div className='text-4xl m-0 px-6 max-w-7xl ml-auto mr-auto mb-5'>Menu</div>
       <MenuCard
         name="Farmhouse"
         imgUrl="https://b.zmtcdn.com/data/dish_photos/a3d/7ca006ec8907c2ae13fd006cf0853a3d.png?fit=around|130:130&crop=130:130;*,*"
