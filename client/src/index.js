@@ -8,18 +8,21 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Profile from "./pages/Profile";
 import Main from "./components/main/index";
 import Signup from "./pages/Signup";
+import { AuthUserProvier } from "./auth/auth-user-provider";
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Auth0ProviderWithHistory>
-        <Routes>
-          <Route path="/" element={<App />}>
-            <Route path="/" element={<Main />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/signup" element={<Signup />} />
-          </Route>
-        </Routes>
+        <AuthUserProvier>
+          <Routes>
+            <Route path="/" element={<App />}>
+              <Route index element={<Main />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/signup" element={<Signup />} />
+            </Route>
+          </Routes>
+        </AuthUserProvier>
       </Auth0ProviderWithHistory>
     </BrowserRouter>
   </React.StrictMode>,

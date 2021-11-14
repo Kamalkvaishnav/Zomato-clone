@@ -5,21 +5,35 @@ import Header from "./components/header";
 import Footer from "./components/footer";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function App() {
-  const { isLoading, isAuthenticated, getIdTokenClaims } = useAuth0();
+  const { isLoading, isAuthenticated, user } = useAuth0();
 
   const navigate = useNavigate();
 
+  const checkUserAlreadyPresent = async (uid) => {
+    try {
+      const res = await axios.get(`http://localhost:5000/users/${uid}`);
+      if (res.status === 200) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (err) {
+      return false;
+    }
+  };
+
   useEffect(() => {
     if (isAuthenticated) {
-      getIdTokenClaims().then((val) => {
-        if (val && val["http://zomato-clone/sign-up"]) {
+      checkUserAlreadyPresent(user.sub).then((present) => {
+        if (!present) {
           navigate("/signup");
         }
       });
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, user, navigate, isLoading]);
 
   return (
     <div className="relative">

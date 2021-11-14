@@ -1,12 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import RestoCard from "./restoCard";
+import GooglePlacesAutocomplete from "react-google-places-autocomplete";
+import { geocodeByPlaceId, getLatLng } from "react-google-places-autocomplete";
 
 function Main() {
+  const [value, setValue] = useState(null);
+
+  const setGeocode = async (location) => {
+    const placeId = location.value.place_id;
+    const geocodes = await geocodeByPlaceId(placeId);
+    const { lat, lng } = await getLatLng(geocodes[0]);
+    console.log(lat, lng);
+  };
+
   return (
     <div>
       <div className="text-5xl Restourants flex flex-wrap align-middle  max-w-7xl ml-auto mr-auto font-semibold pl-5 mt-10 mb-5">
         Top Restourants near you
       </div>
+
+      {/* <p>{value}</p> */}
       <div className="Restourants flex flex-wrap align-middle  max-w-7xl ml-auto mr-auto ">
         <RestoCard
           id="1"
