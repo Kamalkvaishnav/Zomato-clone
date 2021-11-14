@@ -42,4 +42,31 @@ router.post("/addrest", async (req, res) => {
   }
 });
 
+router.get("/single/:id", async (req, res) => {
+  const restaurant = await Modal.findOne({ id: req.params["id"] });
+  if (restaurant) {
+    return res.json({ err: false, message: "Success", restaurant: restaurant });
+  } else {
+    return res
+      .status(404)
+      .json({ err: true, message: "No restaurant found with this id" });
+  }
+});
+
+router.get("/getall", async (req, res) => {
+  try {
+    const resturants = await Modal.find();
+    if (resturants) {
+      return res.json({ err: false, message: "Success", resturants });
+    } else {
+      return res
+        .status(404)
+        .json({ err: true, message: "Fail No resturant found" });
+    }
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ err: true, message: "Something went wrong" });
+  }
+});
+
 module.exports = router;
