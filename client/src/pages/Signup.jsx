@@ -1,19 +1,28 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const [fullname, setFullname] = useState("");
   const [role, setRole] = useState("customer");
   const { user } = useAuth0();
 
+  const navigate = useNavigate();
+
   const handleCompleteProfile = async () => {
-    const res = await axios.post(`http://localhost:5000/signup`, {
+    const response = await axios.post(`http://localhost:5000/signup`, {
       fullname: fullname,
       email: user.email,
       role: role,
       id: user.sub,
     });
+    if (response.status === 200) {
+      navigate("/");
+    } else {
+      console.log(response.data);
+      navigate("/");
+    }
   };
 
   return (
