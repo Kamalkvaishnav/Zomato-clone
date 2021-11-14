@@ -9,7 +9,7 @@ const LocationSearchInput = ({ onSelect }) => {
     const placeId = location.value.place_id;
     const geocodes = await geocodeByPlaceId(placeId);
     const { lat, lng } = await getLatLng(geocodes[0]);
-    onSelect(location, { lat: lat, lng: lng });
+    onSelect({ lable: location.label, latitude: lat, longitude: lng });
   };
 
   return (
@@ -20,6 +20,7 @@ const LocationSearchInput = ({ onSelect }) => {
           value,
           onChange: (val) => {
             setValue(val);
+            setGeocode(val);
           },
         }}
       />

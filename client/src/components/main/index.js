@@ -1,17 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import RestoCard from "./restoCard";
-import GooglePlacesAutocomplete from "react-google-places-autocomplete";
-import { geocodeByPlaceId, getLatLng } from "react-google-places-autocomplete";
+import { useLocation } from "../../location/location-provider";
+import axios from "axios";
 
 function Main() {
-  const [value, setValue] = useState(null);
+  const { location } = useLocation();
 
-  const setGeocode = async (location) => {
-    const placeId = location.value.place_id;
-    const geocodes = await geocodeByPlaceId(placeId);
-    const { lat, lng } = await getLatLng(geocodes[0]);
-    console.log(lat, lng);
-  };
+  useEffect(() => {
+    async function fetchRestaurants({ latitude, longitude }) {
+      const response = await axios.get("http://localhost:5000/restaurants", {
+        params: { latitude: latitude, longitude: longitude },
+      });
+      console.log(response);
+    }
+    if (location) {
+      fetchRestaurants({ latitude: location.latitude, longitude: location.longitude });
+    }
+  }, [location]);
 
   return (
     <div>
@@ -19,7 +24,6 @@ function Main() {
         Top Restourants near you
       </div>
 
-      {/* <p>{value}</p> */}
       <div className="Restourants flex flex-wrap align-middle  max-w-7xl ml-auto mr-auto ">
         <RestoCard
           id="1"
