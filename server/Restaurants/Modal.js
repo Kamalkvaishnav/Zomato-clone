@@ -14,7 +14,6 @@ const restaurantSchema = new Schema({
     type: Array,
     default: [],
   },
-  collection_id: { type: Array, default: [] },
 });
 
 module.exports = mongoose.model("Restaurants", restaurantSchema);
