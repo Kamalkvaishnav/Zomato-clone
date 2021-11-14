@@ -8,6 +8,8 @@ const jwt = require("express-jwt");
 const jwks = require("jwks-rsa");
 const mongoose = require("mongoose");
 const ManagementClient = require("auth0").ManagementClient;
+const StatusCodes = require("http-status-codes").StatusCodes;
+const ReasonPhrases = require("http-status-codes").ReasonPhrases;
 
 dotenv.config();
 
@@ -86,7 +88,7 @@ app.post("/signup", (req, res) => {
   } else if (role == "restraunt-owner") {
     roleId = "rol_KM73shAnTKJQpuXN";
   } else {
-    res.send("invalid role");
+    res.status(StatusCodes.BAD_REQUEST).send("invalid role");
   }
   var data = { roles: [roleId] };
 
@@ -96,11 +98,11 @@ app.post("/signup", (req, res) => {
       auth0
         .assignRolestoUser(params, data)
         .then((val) => {
-          res.send(user);
+          res.status(StatusCodes.OK).send(ReasonPhrases.OK);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => res.status(StatusCodes.BAD_REQUEST).send(err));
     })
-    .catch((err) => console.log(err));
+    .catch((err) => res.status(StatusCodes.BAD_REQUEST).send(err));
 });
 
 app.use("/api/restaurant", restaurantRouter);
