@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Profile from "./pages/Profile";
 import Main from "./components/main/index";
 import Restaurant from "./components/main/RestaurantPage/Restaurant";
+import ForRestaurant from "./components/ForRestaurant/ForRestaurant";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -17,6 +18,7 @@ ReactDOM.render(
           <Route path="/" element={<App />}>
             <Route path="/" element={<Main />} />
             <Route path="/Restaurant/:id" element={<Restaurant/>}/>
+            <Route path="/Dealer" element={<ForRestaurant/>}/>
             <Route path="/profile" element={<Profile />} />
           </Route>
         </Routes>

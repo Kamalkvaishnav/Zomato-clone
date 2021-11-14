@@ -12,6 +12,7 @@ function MenuCard({ name, discription, imgUrl, rating, price }) {
     };
   }
   return (
+    
     <div class="p-6 ml-6 ">
       <div class=" max-w-4xl overflow-hidden shadow-lg rounded-md  bg-white">
         <div class=" flex ">
