@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Profile from "./profile";
 
 function Header() {
-  const [profileStatus, setProfileStatus] = useState("NotLogedIn");
   return (
     <div className="header align-middle flex max-w-7xl ml-auto mr-auto">
       <div className="flex ">
@@ -13,9 +12,9 @@ function Header() {
           ></img>
         </div>
         <div className="header-searchbar p-6 ">
-          <i class="fi fi-rr-Search"></i>
+          <i className="fi fi-rr-Search"></i>
           <div className="header-icon-searchbar shadow rounded-md">
-            <i class="fas fa-search  mr-3 ml-3 text-xl justify-center align-middle"></i>
+            <i className="fas fa-search  mr-3 ml-3 text-xl justify-center align-middle"></i>
             <input
               className="outline-none p-1 justify-center align-middle  w-96 rounded-md"
               type="search"
