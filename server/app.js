@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
@@ -7,12 +6,26 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const jwt = require("express-jwt");
 const jwks = require("jwks-rsa");
+const mongoose = require("mongoose");
+const ManagementClient = require("auth0").ManagementClient;
 
 dotenv.config();
 
 const app = express();
 
-const { DOMAIN, AUDIENCE, PORT = 5000 } = process.env;
+const { DOMAIN, AUDIENCE, CLIENT_SECRET, CLIENT_ID, PORT = 5000 } = process.env;
+
+var auth0 = new ManagementClient({
+  domain: DOMAIN,
+  clientId: CLIENT_ID,
+  clientSecret: CLIENT_SECRET,
+  scope: "update:users",
+  audience: "https://dev-k0hwa40u.us.auth0.com/api/v2/",
+  tokenProvider: {
+    enableCache: true,
+    cacheTTLInSeconds: 10,
+  },
+});
 
 if (!DOMAIN || !AUDIENCE) {
   throw new Error("Please make sure that DOMAIN and AUDIENCE is set in your .env file");
@@ -20,6 +33,7 @@ if (!DOMAIN || !AUDIENCE) {
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
+const restaurantRouter = require("./Restaurants/routes/restaurant");
 
 const checkJwt = jwt({
   secret: jwks.expressJwtSecret({
@@ -40,31 +54,10 @@ app.use(
 );
 
 app.use(logger("dev"));
-app.use(express.json());
-=======
-var express = require("express");
-// var path = require("path");
-var PORT = process.env.PORT || 5000;
-var cookieParser = require("cookie-parser");
-// var logger = require("morgan");
-var mongoose = require("mongoose");
-var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
-const restaurantRouter = require("./Restaurants/routes/restaurant");
-var app = express();
-
-// app.use(logger("dev"));
->>>>>>> main
 app.use(express.urlencoded({ extended: false }));
-// app.use(express.json());
+app.use(express.json());
 app.use(cookieParser());
-<<<<<<< HEAD
 app.use(express.static(path.join(__dirname, "public")));
-
-app.use("/", checkJwt, indexRouter);
-app.use("/users", usersRouter);
-=======
-// app.use(express.static(path.join(__dirname, "public")));
 
 const DBURI = "mongodb://localhost:27017/zomato";
 mongoose.connect(
@@ -79,14 +72,37 @@ mongoose.connect(
     } else {
       console.log("Database connected successfully");
     }
-  }
+  },
 );
 
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
-app.use("/api/restaurant", restaurantRouter);
->>>>>>> main
 
-app.listen(PORT, () => {
-  console.log(`Server is live at ${PORT}..`);
+app.post("/signup", (req, res) => {
+  var params = { id: req.body.id };
+  const role = req.body.role;
+  let roleId = "";
+  if (role == "customer") {
+    roleId = "rol_IqsqD5q88fIIarRg";
+  } else if (role == "restraunt-owner") {
+    roleId = "rol_KM73shAnTKJQpuXN";
+  } else {
+    res.send("invalid role");
+  }
+  var data = { roles: [roleId] };
+
+  auth0
+    .updateUser(params, { name: req.body.fullname })
+    .then((user) => {
+      auth0
+        .assignRolestoUser(params, data)
+        .then((val) => {
+          res.send(user);
+        })
+        .catch((err) => console.log(err));
+    })
+    .catch((err) => console.log(err));
 });
+
+app.use("/api/restaurant", restaurantRouter);
+
+module.exports = app;

@@ -9,6 +9,7 @@ const LoginButton = () => {
       className="nav-btn"
       onClick={() =>
         loginWithRedirect({
+          prompt: "login",
           loginWithRedirect: "/",
         })
       }

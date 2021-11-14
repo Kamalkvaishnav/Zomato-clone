@@ -4,9 +4,24 @@ import { Outlet } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import Header from "./components/header";
 import Footer from "./components/footer";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function App() {
-  const { isLoading, isAuthenticated } = useAuth0();
+  const { isLoading, isAuthenticated, getIdTokenClaims } = useAuth0();
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      getIdTokenClaims().then((val) => {
+        if (val && val["http://zomato-clone/sign-up"]) {
+          navigate("/signup");
+        }
+      });
+    }
+  }, [isAuthenticated]);
+
   return (
     <div className="relative">
       {isLoading && !isAuthenticated ? (
