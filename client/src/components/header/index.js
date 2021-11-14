@@ -16,18 +16,17 @@ function Header() {
           ></img>
         </div>
         <div className="header-searchbar p-6 flex-col">
-          
           <LocationSearchInput onSelect={setLocation} />
-          
 
-          <i className="fi fi-rr-Search"></i>
           <div className="header-icon-searchbar shadow rounded-md">
-            <i className="fas fa-search  mr-3 ml-3 text-xl justify-center align-middle"></i>
-            <input
-              className="outline-none p-1 justify-center align-middle  w-96 rounded-md"
-              type="search"
-              placeholder="Search for restaurant, cuisine or a dish"
-            />
+            <div className="m-1">
+              <i className="fas fa-search  mr-3 ml-3 text-xl justify-center align-middle"></i>
+              <input
+                className="outline-none p-1 justify-center align-middle w-72 rounded-md"
+                type="search"
+                placeholder="Search for restaurant, cuisine or a dish"
+              />
+            </div>
           </div>
         </div>
         <div className="header-profile">
