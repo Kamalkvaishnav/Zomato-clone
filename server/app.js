@@ -35,6 +35,7 @@ if (!DOMAIN || !AUDIENCE) {
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
+const restaurantsRouter = require("./routes/restaurants");
 const restaurantRouter = require("./Restaurants/routes/restaurant");
 
 const checkJwt = jwt({
@@ -79,6 +80,8 @@ mongoose.connect(
 
 app.use("/", indexRouter);
 
+app.use("/users", usersRouter);
+
 app.post("/signup", (req, res) => {
   var params = { id: req.body.id };
   const role = req.body.role;
@@ -98,12 +101,14 @@ app.post("/signup", (req, res) => {
       auth0
         .assignRolestoUser(params, data)
         .then((val) => {
-          res.status(StatusCodes.OK).send(ReasonPhrases.OK);
+          res.status(StatusCodes.OK).send(user);
         })
         .catch((err) => res.status(StatusCodes.BAD_REQUEST).send(err));
     })
     .catch((err) => res.status(StatusCodes.BAD_REQUEST).send(err));
 });
+
+app.use("/restaurants", restaurantsRouter);
 
 app.use("/api/restaurant", restaurantRouter);
 
