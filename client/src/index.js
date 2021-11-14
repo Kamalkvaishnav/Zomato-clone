@@ -12,6 +12,7 @@ import ForRestaurant from "./components/ForRestaurant/ForRestaurant";
 import Signup from "./pages/Signup";
 import { AuthUserProvier } from "./auth/auth-user-provider";
 import { LocationProvider } from "./location/location-provider";
+import AddResto from "./pages/AddResto";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -27,6 +28,7 @@ ReactDOM.render(
                 <Route path="/dealer" element={<ForRestaurant/>}/>
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/signup" element={<Signup />} />
+                <Route path="/addResto" element={<AddResto />} />
               </Route>
             </Routes>
           </LocationProvider>

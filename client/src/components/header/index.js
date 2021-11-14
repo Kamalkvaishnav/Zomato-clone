@@ -15,8 +15,11 @@ function Header() {
             src="https://b.zmtcdn.com/web_assets/b40b97e677bc7b2ca77c58c61db266fe1603954218.png"
           ></img>
         </div>
-        <div className="header-searchbar p-6 ">
+        <div className="header-searchbar p-6 flex-col">
+          
           <LocationSearchInput onSelect={setLocation} />
+          
+
           <i className="fi fi-rr-Search"></i>
           <div className="header-icon-searchbar shadow rounded-md">
             <i className="fas fa-search  mr-3 ml-3 text-xl justify-center align-middle"></i>

@@ -15,7 +15,7 @@ const LocationSearchInput = ({ onSelect }) => {
   return (
     <div>
       <GooglePlacesAutocomplete
-        className="w-full"
+        className="w-full "
         selectProps={{
           value,
           onChange: (val) => {

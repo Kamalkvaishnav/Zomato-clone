@@ -51,7 +51,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="flex flex-col w-1/2 mx-auto border-2 p-4 gap-6">
+    <div className="flex flex-col w-1/2 mx-w-7xl border-2 p-4 gap-6 ml-44 mr-auto ">
       <label>
         <span className="block">Full Name </span>
         <input
