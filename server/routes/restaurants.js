@@ -1,14 +1,28 @@
 const express = require("express");
 const router = express.Router();
-const User = require("../users/User");
+const Restaurant = require("../Restaurants/Modal");
 const geolib = require("geolib");
 
+async function getAllRestaurantsWithinRange(userLocation, range = 6000) {
+  if (!userLocation.latitude || !userLocation.longitude) {
+    return [];
+  } else {
+    const nearbyRestaurants = [];
+    const restaurants = await Restaurant.find();
+    for (let restaurant of restaurants) {
+      const distance = geolib.getDistance(userLocation, restaurant.location);
+      if (distance < range) {
+        nearbyRestaurants.push(restaurant);
+      }
+    }
+    return nearbyRestaurants;
+  }
+}
+
 router.get("/", async function (req, res) {
-  const udaipurLatLng = { latitude: "26.2389469", longitude: "73.02430939999999" };
-  const cord = req.query;
-  const dist = geolib.getDistance(cord, udaipurLatLng);
-  console.log(cord, udaipurLatLng, dist);
-  res.send("cords", cord, udaipurLatLng);
+  const userLocation = req.query;
+  const restaurants = await getAllRestaurantsWithinRange(userLocation);
+  return res.status(200).json(restaurants);
 });
 
 module.exports = router;
